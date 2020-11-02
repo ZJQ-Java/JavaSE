@@ -38,6 +38,6 @@ public class RunableDemo implements Runnable{
         new Thread(R1).start();
 
         RunableDemo R2 = new RunableDemo( "Thread-2");
-        R2.start();
+        R2.start() ;
     }
 }
