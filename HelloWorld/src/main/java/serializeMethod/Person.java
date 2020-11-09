@@ -7,7 +7,7 @@ import java.io.Serializable;
  * Date:     2019/1/9 10:14
  */
 public class Person implements Serializable{   //一定要实现一下Serializable
-    private final long serialVersionUID = 1;
+    private final long serialVersionUID = 1L;
     private int id;
     private transient String name;   //序列化的时候保证不被序列化
     private int age;
