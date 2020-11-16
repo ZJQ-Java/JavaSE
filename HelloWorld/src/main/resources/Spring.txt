@@ -1,0 +1,142 @@
+﻿Spring
+1.ioc
+可以通过xml文件进行配置：
+例子1：
+<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+    <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/test" />
+</bean>
+例子2：
+<bean id="user" class="com.model.ioc.bean.User">
+        <property name="id" value="1"/>
+        <property name="name" value="zjq"/>
+        <property name="password" value="zjq123"/>
+
+        <constructor-arg index="0" value="1"/>
+        <constructor-arg index="1" value="zhang"/>
+        <constructor-arg index="2" value="zhqqqq"/>
+</bean>
+
+
+也可以使用@Component,在自动注入的类上，使用Annotation可以大幅简化配置，每个Bean通过@Component和@Autowired注入；
+然后再属性上@Autowired
+
+同时再注入时可以设置不同的属性，
+例：@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE) // @Scope("prototype")，单例
+
+@Autowired(required = false) 可选注入，默认情况下，当我们标记了一个@Autowired后，Spring如果没有找到对应类型的Bean，它会抛出NoSuchBeanDefinitionException异常。
+
+如果想注入一个三方包中的对象
+需要
+@Bean("z")
+@Primary //主数据源，默认
+ZoneId createZoneOfZ() {
+    return ZoneId.of("Z");
+}
+
+@Bean
+@Qualifier("utc8")
+ZoneId createZoneOfUTC8() {
+    return ZoneId.of("UTC+08:00");
+}
+注意：相同类型的对象，需要指定不同的别名
+
+
+Spring容器会对上述Bean做如下初始化流程：
+
+调用构造方法创建MailService实例；
+根据@Autowired进行注入；
+调用标记有@PostConstruct的init()方法进行初始化。
+而销毁时，容器会首先调用标记有@PreDestroy的shutdown()方法。
+
+Spring只根据Annotation查找无参数方法，对方法名不作要求。
+
+
+
+两种方法可以通过启动容器
+@Configuration
+@ComponentScan
+public class AppConfig {
+    public static void main(String[] args) {
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        UserService userService = context.getBean(UserService.class);
+        User user = userService.login("bob@example.com", "password");
+        System.out.println(user.getName());
+    }
+}
+
+
+
+在Spring中读取文件：
+1.方式一：
+@Value("classpath:/logo.txt") / @Value("file:/path/to/logo.txt")
+private Resource resource;
+然后resource.getInputStream()，获取文件流
+2.方式二：
+@PropertySource("app.properties") // 表示读取classpath的app.properties
+@Value("${app.zone:Z}")
+String zoneId;
+"${app.zone}"表示读取key为app.zone的value，如果key不存在，启动将报错；
+"${app.zone:Z}"表示读取key为app.zone的value，但如果key不存在，就使用默认值Z。
+3.方式三：
+以#{bean.property}形式注入时，Spring容器自动把指定Bean的指定属性值注入。
+
+
+Spring AOP
+在Java平台上，对于AOP的织入，有3种方式：
+
+编译期：在编译时，由编译器把切面调用编译进字节码，这种方式需要定义新的关键字并扩展编译器，AspectJ就扩展了Java编译器，使用关键字aspect来实现织入；
+类加载器：在目标类被装载到JVM时，通过一个特殊的类加载器，对目标类的字节码重新“增强”；
+运行期：目标对象和切面都是普通Java类，通过JVM的动态代理功能或者第三方库实现运行期动态织入。
+最简单的方式是第三种，Spring的AOP实现就是基于JVM的动态代理。由于JVM的动态代理要求必须实现接口，如果一个普通类没有业务接口，就需要通过CGLIB或者Javassist这些第三方库实现。
+
+可见，虽然Spring容器内部实现AOP的逻辑比较复杂（需要使用AspectJ解析注解，并通过CGLIB实现代理类），但我们使用AOP非常简单，一共需要三步：
+
+定义执行方法，并在方法上通过AspectJ的注解告诉Spring应该在何处调用此方法；
+标记@Component和@Aspect；
+在@Configuration类上标注@EnableAspectJAutoProxy。
+
+拦截器类型
+顾名思义，拦截器有以下类型：
+
+@Before：这种拦截器先执行拦截代码，再执行目标代码。如果拦截器抛异常，那么目标代码就不执行了；
+@After：这种拦截器先执行目标代码，再执行拦截器代码。无论目标代码是否抛异常，拦截器代码都会执行；
+@AfterReturning：和@After不同的是，只有当目标代码正常返回时，才执行拦截器代码；
+@AfterThrowing：和@After不同的是，只有当目标代码抛出了异常时，才执行拦截器代码；
+@Around：能完全控制目标代码是否执行，并可以在执行前后、抛异常后执行任意拦截代码，可以说是包含了上面所有功能。
+around例子：
+public Object around(ProceedingJoinPoint joinPoint) {
+        Object result = null;
+        authService.checkAccess();
+        System.out.println("befor 在切入点执行前运行");
+
+        try{
+            result = joinPoint.proceed(joinPoint.getArgs());//获取参数
+            System.out.println("after 在切入点执行后运行,result = " + result);
+        } catch (Throwable e) {
+            System.out.println("after 在切入点执行后抛出exception运行");
+            e.printStackTrace();
+        } finally {
+            System.out.println("finally......");
+        }
+
+       return result;
+}
+
+execution表达式是我们在开发过程中最常用的，它的语法如下：
+execution{
+       modifier-pattern：用于匹配public、private等访问修饰符
+       ret-type-pattern：用于匹配返回值类型，不可省略
+       declaring-type-pattern：用于匹配包类型
+       modifier-pattern（param-pattern）：用于匹配类中的方法，不可省略
+       throws-pattern：用于匹配抛出异常的方法
+}
+//匹配com.aop.service.impl.ProductServiceImpl类下的方法名以delete开头、参数类型为Long的public方法
+@Pointcut("execution(public * com.aop.service.impl.ProductServiceImpl.delete*(Long))")
+//匹配com.aop.service.impl.ProductServiceImpl类下方法名以select或delete开头的所有方法
+@Pointcut("execution(* com.aop.service.impl.ProductServiceImpl.select*(..)) || " +
+            "execution(* com.aop.service.impl.ProductServiceImpl.delete*(..))")
+
+
+AOP踩坑
+1.访问被注入的Bean时，总是调用方法而非直接访问字段；
+2.编写Bean时，如果可能会被代理，就不要编写public final方法。

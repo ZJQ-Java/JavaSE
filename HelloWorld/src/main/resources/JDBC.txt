@@ -1,0 +1,77 @@
+JDBC （Java dataBase Connectivity）
+//建立连接
+Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)
+//创建statment，注意要使用prepareStatment 防止注入
+PreparedStatement ps = conn.prepareStatement("SELECT * FROM `sql`.course WHERE c_id=?")
+
+//查询
+ps.executeQuery()
+//insert /update /delete
+ps.executeUpdate()  //返回值为受影响的行数
+//想要返回主键
+PreparedStatement ps = conn.prepareStatement("INSERT INTO students (grade, name, gender) VALUES (?,?,?)",
+                                              Statement.RETURN_GENERATED_KEYS))
+try (ResultSet rs = ps.getGeneratedKeys()) {
+if (rs.next()) {
+    long id = rs.getLong(1); // 注意：索引从1开始
+    }
+ }				  
+
+
+例子：
+public static void main(String[] args) {
+        String JDBC_URL = "jdbc:mysql://localhost:3306/sql?useUnicode=true&useSSL=true&characterEncoding=UTF-8&connectTimeout=1000&zeroDateTimeBehavior=convertToNull";
+        String JDBC_USER = "root";
+        String JDBC_PASSWORD = "zjq516902";
+        try (Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
+            try (PreparedStatement ps = conn.prepareStatement("SELECT * FROM `sql`.course WHERE c_id=?")) {
+                ps.setObject(1, "01"); // 注意：索引从1开始
+//                ps.setObject(2, 3);
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        String id = rs.getString("c_id");
+                        String c_name = rs.getString("c_name");
+                        String t_id = rs.getString("t_id");
+                        int t_num = rs.getInt("t_num");
+                        System.out.println("id=" + id +" name" + c_name + " t_id" + t_id + " num=" + t_num);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+批量更改：
+try (PreparedStatement ps = conn.prepareStatement("INSERT INTO students (name, gender, grade, score) VALUES (?, ?, ?, ?)")) {
+    // 对同一个PreparedStatement反复设置参数并调用addBatch():
+    for (Student s : students) {
+        ps.setString(1, s.name);
+        ps.setBoolean(2, s.gender);
+        ps.setInt(3, s.grade);
+        ps.setInt(4, s.score);
+        ps.addBatch(); // 添加到batch
+    }
+    // 执行batch:
+    int[] ns = ps.executeBatch();
+    for (int n : ns) {
+        System.out.println(n + " inserted."); // batch中每个SQL执行的结果数量
+    }
+}
+
+	
+事务：
+Connection conn = openConnection();
+try {
+    // 关闭自动提交:
+    conn.setAutoCommit(false);
+    // 执行多条SQL语句:
+    insert(); update(); delete();
+    // 提交事务:
+    conn.commit();
+} catch (SQLException e) {
+    // 回滚事务:
+    conn.rollback();
+} finally {
+    conn.setAutoCommit(true);
+    conn.close();
+}

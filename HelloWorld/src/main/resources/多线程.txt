@@ -1,0 +1,118 @@
+多线程
+操作系统调度的最小任务单位其实不是进程，而是线程
+Java用Thread对象表示一个线程，通过调用start()启动一个新线程；
+
+一个线程对象只能调用一次start()方法；
+
+线程的执行代码写在run()方法中；
+
+线程调度由操作系统决定，程序本身无法决定调度顺序；
+
+Thread.sleep()可以把当前线程暂停一段时间。
+
+可以对线程设定优先级，设定优先级的方法是：Thread.setPriority(int n) // 1~10, 默认值5,但无法确保高优先级一定会先执行
+三种方式：
+方式一：            Thread t = new Thread(() -> System.out.println("---------------"));
+方式二：X extend Thread 重写run，Thread t =  new X() ; t.start();
+方式三：X implement Runnable 重写run，Thread t =  new Thread(new X()) ; t.start();
+
+线程状态：
+在Java程序中，一个线程对象只能调用一次start()方法启动新线程，并在新线程中执行run()方法。一旦run()方法执行完毕，线程就结束了。
+new，新创建的线程，尚未执行
+blocked 运行中的线程，因为某些操作被阻塞而挂起；
+Timed Waiting（sleep） 运行中的线程，因为执行sleep()方法正在计时等待；
+Runnable 运行中的线程，正在执行run()方法的Java代码；
+Waiting 因某些操作再等待中
+terminal 线程已终止，因为run()方法执行完毕。
+
+线程终止的原因有：
+
+线程正常终止：run()方法执行到return语句返回；
+线程意外终止：run()方法因为未捕获的异常导致线程终止；
+对某个线程的Thread实例调用stop()方法强制终止（强烈不推荐使用）。
+
+t.join 等待t线程的start执行完成后，再继续执行 join（time）最长等待时间
+
+volatile 线程共享变量："volatile保证时效性不是原子性"
+
+守护线程：
+Thread t = new MyThread();
+t.setDaemon(true);
+t.start();
+守护线程是为其他线程服务的线程；
+所有非守护线程都执行完毕后，虚拟机退出；
+守护线程不能持有需要关闭的资源（如打开文件等）。
+
+线程同步：
+synchronized保证了代码块在任意时刻最多只有一个线程能执行
+synchronized使用：
+找出修改共享变量的线程代码块；
+选择一个共享实例作为锁；
+使用synchronized(lockObject) { ... }。
+多个线程同步时：要使用同一个加锁对象，例如：
+  public void run() {
+        for (int i=0; i<10000; i++) {
+            synchronized(Counter.lock) {
+                Counter.studentCount += 1;
+            }
+        }
+    }
+在使用synchronized的时候，不必担心抛出异常。因为无论是否有异常，都会在synchronized结束处正确释放锁
+
+public void add(int n) {
+    synchronized(this) { // 锁住this
+        count += n;
+    } // 解锁
+}
+等同于
+public synchronized void add(int n) { // 锁住this
+    count += n;
+} // 解锁
+Java的synchronized锁是可重入锁；
+
+死锁产生的条件是多线程各自持有不同的锁，并互相试图获取对方已持有的锁，导致无限等待；
+避免死锁的方法是多线程获取锁的顺序要一致。
+
+
+wait和notify用于多线程协调运行：
+在synchronized内部可以调用wait()使线程进入等待状态；
+必须在已获得的锁对象上调用wait()方法；
+在synchronized内部可以调用notify()或notifyAll()唤醒其他等待线程；
+必须在已获得的锁对象上调用notify()或notifyAll()方法；
+已唤醒的线程还需要重新获得锁后才能继续执行。
+
+ReentrantLock悲观锁
+只允许一个线程写入；
+允许多个线程在没有写入时同时读取；
+适合读多写少的场景。
+
+StampedLock 乐观锁
+提供了乐观读锁，可取代ReadWriteLock以进一步提升并发性能；
+是不可重入锁。
+stampedLock.tryOptimisticRead();
+stampedLock.validate(timeStamp)检查乐观读锁后是否有其他写锁发生（判断在读取期间版本号有无变化)
+
+
+线程安全集合
+interface	non-thread-safe	              thread-safe
+List	    ArrayList	                  CopyOnWriteArrayList
+Map	        HashMap	                      ConcurrentHashMap
+Set	        HashSet / TreeSet             CopyOnWriteArraySet
+Queue	    ArrayDeque / LinkedList	      ArrayBlockingQueue / LinkedBlockingQueue
+Deque	    ArrayDeque / LinkedList	      LinkedBlockingDeque
+
+Map threadSafeMap = Collections.synchronizedMap(unsafeMap);
+
+
+线程池；
+public static final ExecutorService          fixPool             = Executors.newFixedThreadPool(5);//指定线程数量
+    public static final ExecutorService          cachePool           = Executors.newCachedThreadPool(); // 动态的
+    public static final ExecutorService          newCachePool        = new ThreadPoolExecutor(5, 10, 60L,
+            TimeUnit.SECONDS,
+            new SynchronousQueue<Runnable>()); // 5-10个
+    public static final ExecutorService          singlePool          = Executors.newSingleThreadExecutor(); // 单线程池
+    public static final ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(5); // 定时执行
+
+
+Future<T> t = threadPool.submit(); feature可以用CompleteableFuture代替
+CompletableFuture<Integer> t = CompletableFuture.supplyAsync(CompleteAbleFutureDemo::getRandom);
