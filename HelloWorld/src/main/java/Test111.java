@@ -1,3 +1,4 @@
+import ReflectTest.User;
 import com.alibaba.fastjson.JSONObject;
 
 import java.lang.reflect.Array;
@@ -74,13 +75,20 @@ public class Test111 {
 //        str = json.toJSONString();
 //        byte[] bytes = str.getBytes();
 //        System.out.println(new String(bytes));
-        int i = 0;
-        i = i|1<<3;
-        System.out.println(i);
-        if(i == 0b11111){
-            System.out.println(true);
-        }else{
-            System.out.println(0b11111);
+//        int i = 0;
+//        i = i|1<<3;
+//        System.out.println(i);
+//        if(i == 0b11111){
+//            System.out.println(true);
+//        }else{
+//            System.out.println(0b11111);
+//        }
+        List<User> users = Arrays.asList(new User(1,1,"z"),new User(2,2,"g"));
+        System.out.println(users);
+        for (User user : users) {
+            user.setAge(1);
         }
+        System.out.println(users);
+
     }
 }
