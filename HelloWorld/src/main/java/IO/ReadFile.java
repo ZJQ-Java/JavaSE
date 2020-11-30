@@ -1,7 +1,6 @@
-package FileInputStream;
+package IO;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 
 /**
  * Date:     2019/2/19 14:43

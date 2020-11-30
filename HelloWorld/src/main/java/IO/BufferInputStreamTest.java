@@ -1,6 +1,9 @@
-package Expection;
+package IO;
+
+import Expection.MyException;
 
 import java.io.*;
+import java.io.InputStream;
 import java.rmi.server.ExportException;
 
 /**
@@ -10,7 +13,7 @@ import java.rmi.server.ExportException;
 public class BufferInputStreamTest {
     public static void method(String srcPath) throws MyException, IOException {
 
-        InputStream inputStream = new BufferedInputStream(new FileInputStream(srcPath));
+        java.io.InputStream inputStream = new BufferedInputStream(new FileInputStream(srcPath));
         byte[] bytes = new byte[1024];
         int len;
         while((len = inputStream.read(bytes)) != -1){

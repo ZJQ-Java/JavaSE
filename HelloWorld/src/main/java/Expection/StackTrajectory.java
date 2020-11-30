@@ -1,19 +1,27 @@
 package Expection;
 
 public class StackTrajectory {
-    void f(){
+    void f() {
         try {
-            throw new Exception();
+            int i = 100 / 0;
         } catch (Exception e) {
-            for (StackTraceElement stackTraceElement : e.getStackTrace()) {
-                System.out.println(stackTraceElement);
-            }
+//            for (StackTraceElement stackTraceElement : e.getStackTrace()) {
+//                System.out.println(stackTraceElement);
+//            }
+            //            e.printStackTrace();
+
+            System.out.println("e:" + e + "    e.message:" + e.getMessage());
+//            System.out.println(e.getMessage());
+//            System.out.println(e.toString());
+
         }
     }
-    void g(){
+
+    void g() {
         f();
     }
-    void k(){
+
+    void k() {
         g();
     }
 

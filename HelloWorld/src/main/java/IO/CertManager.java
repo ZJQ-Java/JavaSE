@@ -1,4 +1,4 @@
-package FileInputStream;
+package IO;
 
 import sun.misc.BASE64Encoder;
 
