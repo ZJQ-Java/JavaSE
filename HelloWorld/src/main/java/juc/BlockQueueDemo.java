@@ -1,7 +1,6 @@
 package juc;
 
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -111,6 +110,7 @@ public class BlockQueueDemo {
         System.out.println(blockingQueue.take());
         System.out.println("--------------");
         System.out.println(blockingQueue.take()); // 没有这个元素，一直阻塞
+        ExecutorService executor = Executors.newSingleThreadExecutor();
     }
 
     /**
