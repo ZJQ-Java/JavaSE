@@ -27,29 +27,29 @@ public class ReadWriteLockDemo {
 }
 
 class CacheMap {
-    public Map<String, String> map = new HashMap<>();
+    public volatile Map<String, String> map = new HashMap<>();
     ReadWriteLock lock = new ReentrantReadWriteLock();
 
     public void put(String key, String value) {
-        try{
+        try {
             lock.writeLock().lock();
             System.out.println("put key :" + key + " value：" + value);
             map.put(key, value);
             System.out.println("put key :" + key + " value：" + value + " success");
-        }finally {
+        } finally {
             lock.writeLock().unlock();
         }
 
     }
 
     public String get(String key) {
-        try{
+        try {
             lock.readLock().lock();
             System.out.println("get key :" + key);
             String s = map.get(key);
             System.out.println("get key :" + key + " success");
             return s;
-        }finally {
+        } finally {
             lock.readLock().unlock();
         }
 
