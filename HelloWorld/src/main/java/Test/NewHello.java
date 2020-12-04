@@ -1,6 +1,5 @@
 package Test;
 
-import com.sun.istack.internal.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +14,7 @@ public class NewHello {
     public NewHello() {
     }
 
-    static public int testNullAble(int i,@Nullable boolean flag){
+    static public int testNullAble(int i, boolean flag){
         if(flag){
             return i;
         }
