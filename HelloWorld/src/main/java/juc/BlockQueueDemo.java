@@ -130,6 +130,7 @@ public class BlockQueueDemo {
         System.out.println(blockingQueue.poll());
         System.out.println(blockingQueue.poll());
         System.out.println(blockingQueue.poll());
+//        blockingQueue.offer("rr").sout
         blockingQueue.poll(2, TimeUnit.SECONDS); // 等待超过2秒就退出
     }
 }
