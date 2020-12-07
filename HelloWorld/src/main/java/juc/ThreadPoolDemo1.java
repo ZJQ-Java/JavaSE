@@ -25,6 +25,7 @@ public class ThreadPoolDemo1 {
                 System.out.println(Thread.currentThread().getName() + " i=" + finalI);
             });
         }
+        System.out.println(Runtime.getRuntime().availableProcessors());
         thread.shutdown();
 
     }
