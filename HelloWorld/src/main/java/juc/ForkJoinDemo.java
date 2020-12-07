@@ -1,6 +1,7 @@
 package juc;
 
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveTask;
 import java.util.stream.LongStream;
@@ -40,30 +41,42 @@ public class ForkJoinDemo extends RecursiveTask<Long> {
 
         return result;
     }
+    public static Long test() throws ExecutionException, InterruptedException {
+        ForkJoinPool forkJoinPool = new ForkJoinPool();
+        ForkJoinTask<Long> forkJoinTask = new ForkJoinDemo(0L, 100_000_0000);
+        ForkJoinTask<Long> submit = forkJoinPool.submit(forkJoinTask);
+        return submit.get();
+    }
 
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
         long startTime = System.currentTimeMillis();
         Long sum = 0L;
-        for (int i = 0; i <= 100_000_000; i++) {
-            sum += i;
-        }
+//        for (int i = 0; i <= 100_000_0000; i++) {
+//            sum += i;
+//        }
         long endTime = System.currentTimeMillis();
-        System.out.println(endTime - startTime  +"  sum=" + sum);
+//        System.out.println(endTime - startTime  +"  sum=" + sum);
+//
+//        ForkJoinDemo forkJoinDemo = new ForkJoinDemo(0, 100_000_0000);
+//        startTime = System.currentTimeMillis();
+//        sum = 0L;
+//        sum = forkJoinDemo.compute();
+//        endTime = System.currentTimeMillis();
+//
+//        System.out.println(endTime - startTime +"  sum=" + sum);
+//
+//        sum = 0L;
+//        startTime = System.currentTimeMillis();
+//        sum = LongStream.rangeClosed(0, 100_000_0000).parallel().sum();
+//        endTime = System.currentTimeMillis();
+//        System.out.println(endTime - startTime +"  sum=" + sum);
 
-        ForkJoinDemo forkJoinDemo = new ForkJoinDemo(0, 100_000_000);
-        startTime = System.currentTimeMillis();
         sum = 0L;
-        sum = forkJoinDemo.compute();
-        endTime = System.currentTimeMillis();
-
-        System.out.println(endTime - startTime +"  sum=" + sum);
-
-        sum = 0L;
         startTime = System.currentTimeMillis();
-        sum = LongStream.rangeClosed(0, 100_000_000).parallel().sum();
+        sum = ForkJoinDemo.test();
         endTime = System.currentTimeMillis();
         System.out.println(endTime - startTime +"  sum=" + sum);
-
         /*User u1 = new User(1, 21, "a");
         User u2 = new User(2, 22, "b");
         User u3 = new User(3, 23, "c");
