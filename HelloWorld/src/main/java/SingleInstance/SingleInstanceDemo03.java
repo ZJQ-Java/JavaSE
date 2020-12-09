@@ -1,6 +1,7 @@
 package SingleInstance;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 
 public class SingleInstanceDemo03 {
     //懒汉  线程安全 使用volatile 禁止指令重排
@@ -8,9 +9,15 @@ public class SingleInstanceDemo03 {
     //（2）将内存空间的地址赋值给对应的引用。
     //（3）初始化对象
     private static volatile SingleInstanceDemo03 instance;
+    private static          boolean              flag = false;
 
     //实例必须有 volatile 关键字修饰，其保证初始化完全。
     private SingleInstanceDemo03() throws Exception {
+        if (!flag) {
+            flag = true;
+        } else {
+            throw new Exception("不要重复创建对象");
+        }
         if (instance != null) {
             throw new Exception("不要重复创建对象");
         }
@@ -46,12 +53,17 @@ public class SingleInstanceDemo03 {
         }
         Thread.sleep(2000);
         countDownLatch.countDown();*/
-        SingleInstanceDemo03 instance = SingleInstanceDemo03.getInstance();
-        System.out.println(instance);
+
 
         Constructor<SingleInstanceDemo03> constructor = SingleInstanceDemo03.class.getDeclaredConstructor(null);
         constructor.setAccessible(true);
         SingleInstanceDemo03 singleInstanceDemo04 = constructor.newInstance();
         System.out.println(singleInstanceDemo04);
+
+//        Field flag = SingleInstanceDemo03.class.getDeclaredField("flag");
+//        flag.setAccessible(true);
+//        flag.setBoolean("flag", false);
+        SingleInstanceDemo03 instance = SingleInstanceDemo03.getInstance();
+        System.out.println(instance);
     }
 }
