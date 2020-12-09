@@ -38,10 +38,13 @@ class TestDeadLockThread extends Thread {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                synchronized (b) {
+                    System.out.println("bbbbbbbb");
+                }
             }
-            synchronized (b) {
+            /*synchronized (b) {
                 System.out.println("bbbbbbbb");
-            }
+            }*/
         } else {
             synchronized (b) {
                 System.out.println("----------choice2-bbb----------");
@@ -50,11 +53,13 @@ class TestDeadLockThread extends Thread {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
+                synchronized (a) {
+                    System.out.println("----------choice2-aaa----------");
+                }
             }
-            synchronized (a) {
+            /*synchronized (a) {
                 System.out.println("----------choice2-aaa----------");
-            }
+            }*/
         }
 
     }
