@@ -4,7 +4,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class VolatileDemo {
     public static volatile AtomicInteger num = new AtomicInteger(0);
-
+//    volatile
+    //可见性
+    //不保证原子性
+    //禁止指令重排
     //可见性
     public static void Visibility() throws InterruptedException {
         new Thread(() -> {
