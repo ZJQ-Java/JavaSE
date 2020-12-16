@@ -65,6 +65,12 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.72</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+            <version>1.8</version>
+        </dependency>
+
     </dependencies>
 
 </project>
