@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 public class ReflectDemo {
     private int    id;
     private String name;
-    public  int    age;
+    private   int    age;
 
     private ReflectDemo() {
     }
@@ -44,7 +44,7 @@ public class ReflectDemo {
     }
 
     private void test() {
-        System.out.println("------------");
+        System.out.println("-----test-------");
     }
 
     @Override
@@ -57,22 +57,22 @@ public class ReflectDemo {
     }
 
     public static void main(String[] args)
-            throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException {
+            throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchFieldException {
         Class<?> aClass = Class.forName("ReflectTest.ReflectDemo");
         String name = aClass.getName();
-        System.out.println("name:" + name);
+        System.out.println("fieldName:" + name);
         String simpleName = aClass.getSimpleName();
         System.out.println("simpleName :" + simpleName);
-        System.out.println("==============field====================");
+        System.out.println("==============fieldName====================");
         Field[] fields = aClass.getFields();
         for (Field field : fields) {
-            System.out.println("field :" + field);
+            System.out.println("fieldName :" + field);
         }
 
         System.out.println("==============getDeclaredFields====================");
         fields = aClass.getDeclaredFields();
         for (Field field : fields) {
-            System.out.println("field :" + field);
+            System.out.println("fieldName :" + field);
         }
 
         System.out.println("==============method====================");
@@ -92,7 +92,25 @@ public class ReflectDemo {
         for (Constructor<?> constructor1 : constructors) {
             System.out.println("constructors:" + constructor1);
         }
+        //=================invoke==================
+        System.out.println("=================invoke==================");
         ReflectDemo o = (ReflectDemo) constructor.newInstance();
         System.out.println(o);
+        Method setAge = aClass.getDeclaredMethod("setAge", int.class);
+        setAge.invoke(o, 18);
+        System.out.println(o);
+
+        System.out.println();
+        //setAccessible
+        System.out.println("=============setAccessible===================");
+        Field fieldName = aClass.getDeclaredField("name");
+//        fieldName.setAccessible(true);
+        fieldName.set(o, "hahaha1");
+        System.out.println(fieldName.get(o));
+
+
+        //---------------------
+        Method test = aClass.getDeclaredMethod("test", null);
+        test.invoke(o, null);
     }
 }
