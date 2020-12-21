@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 public class ReflectDemo {
     private int    id;
     private String name;
-    private   int    age;
+    private int    age;
 
     private ReflectDemo() {
     }
@@ -57,7 +57,8 @@ public class ReflectDemo {
     }
 
     public static void main(String[] args)
-            throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchFieldException {
+            throws Exception {
+
         Class<?> aClass = Class.forName("ReflectTest.ReflectDemo");
         String name = aClass.getName();
         System.out.println("fieldName:" + name);
@@ -94,6 +95,7 @@ public class ReflectDemo {
         }
         //=================invoke==================
         System.out.println("=================invoke==================");
+        constructor.setAccessible(true);
         ReflectDemo o = (ReflectDemo) constructor.newInstance();
         System.out.println(o);
         Method setAge = aClass.getDeclaredMethod("setAge", int.class);
@@ -102,15 +104,22 @@ public class ReflectDemo {
 
         System.out.println();
         //setAccessible
-        System.out.println("=============setAccessible===================");
+        System.out.println("=============setAccessible 外部使用的时需要设置===================");
         Field fieldName = aClass.getDeclaredField("name");
-//        fieldName.setAccessible(true);
+        fieldName.setAccessible(true);
         fieldName.set(o, "hahaha1");
         System.out.println(fieldName.get(o));
 
 
         //---------------------
         Method test = aClass.getDeclaredMethod("test", null);
+        test.setAccessible(true);
         test.invoke(o, null);
+
+
+        for (Field _filed : aClass.getDeclaredFields()) {
+            _filed.setAccessible(true);
+            System.out.println(_filed.get(o));
+        }
     }
 }
