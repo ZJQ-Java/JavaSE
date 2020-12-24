@@ -7,7 +7,7 @@ public class OOMDemo {
     public static void main(String[] args) {
         try {
             //电脑死机
-            stackLeakByThread();
+            test01();
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(0);

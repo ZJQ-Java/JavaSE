@@ -3,6 +3,7 @@ package jvm;
 import org.checkerframework.checker.units.qual.C;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ClassLoaderDemo {
@@ -18,12 +19,18 @@ public class ClassLoaderDemo {
          */
 //        Class c1 = Class.forName("jvm.Test");
 //        System.out.println(c1);
-        ClassLoader classLoader = Test.class.getClassLoader();
-        Class c2 = classLoader.loadClass("jvm.Test");
-        System.out.println(c2);
-
-        Class c3 = Class.forName("jvm.Test", true, Test.class.getClassLoader());
-        System.out.println(c3);
+//        ClassLoader classLoader = Test.class.getClassLoader();
+//        Class c2 = classLoader.loadClass("jvm.Test");
+//        System.out.println(c2);
+//
+//        Class c3 = Class.forName("jvm.Test", true, Test.class.getClassLoader());
+//        System.out.println(c3);
+        List<String> list = new ArrayList<>();
+        list.add("2");
+        List<Object> objects = Collections.singletonList(list);
+        System.out.println(objects);
+//        System.out.println(objects.isEmpty());
+//        System.out.println(objects==null);
     }
 
 }
