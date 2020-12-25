@@ -6,7 +6,11 @@ import java.awt.event.KeyEvent;
 
 public class RobotDemo {
     public static void main(String[] args) throws AWTException {
-        keepClink();
+//        keepClink();
+        String s = "";
+        while (true) {
+            s += "99999999999999999999999999999999999999999999999999999999999999999999999999999999";
+        }
     }
 
     public static void keepSendMsg() throws AWTException {
