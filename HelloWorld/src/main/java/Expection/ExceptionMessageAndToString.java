@@ -9,6 +9,7 @@ public class ExceptionMessageAndToString {
             System.out.println("e:" + e);
             System.out.println("e.toString:" + e.toString());
             System.out.println("e.getMessage :" + e.getMessage());
+
         }
     }
 }

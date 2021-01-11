@@ -9,7 +9,7 @@ import java.util.List;
 public class JvmHeapOOM {
     public static void main(String[] args) {
         List<byte[]> list = new ArrayList<byte[]>();
-/*
+
         new Thread(() -> {
             while (true) {
                 System.out.println(new Date().toLocaleString() + Thread.currentThread() + "OOM");
@@ -22,27 +22,9 @@ public class JvmHeapOOM {
                 }
             }
         }).start();
-        try {
-            Thread.sleep(6000);
-        } catch (InterruptedException e) {
-       e.printStackTrace();
-        }*/
-        new Thread(()->{
-
-            while (true) {
-                System.out.println("------------------------");
-                try {
-                    Thread.sleep(1000);
-                    byte[] bytes = new byte[1024];
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-       byte[] bytes = new byte[1024*1024*10];
 
         // 线程二
-        /* new Thread(() -> {
+         new Thread(() -> {
             try {
                 Thread.sleep(6000);
             } catch (InterruptedException e) {
@@ -54,12 +36,12 @@ public class JvmHeapOOM {
                 System.out.println(list.size());
                 try {
                     byte[] bytes = new byte[1024*1024 /2];
-//                    list.add(bytes);
+                    list.add(bytes);
                     Thread.sleep(1000);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-        }).start();*/
+        }).start();
     }
 }
