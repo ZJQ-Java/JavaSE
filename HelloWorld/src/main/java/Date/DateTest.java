@@ -6,14 +6,15 @@ import java.util.Date;
  * Date:     2019/1/21 14:41
  */
 public class DateTest {
-    public void method(){
+    public void method() {
         long starttime = System.currentTimeMillis();
         int j = 1;
-        for(int i =0;i<100;i++){
+        for (int i = 0; i < 100; i++) {
             j++;
         }
-        System.out.println("cost time:"+(System.currentTimeMillis()-starttime));
+        System.out.println("cost time:" + (System.currentTimeMillis() - starttime));
     }
+
     public static void main(String[] args) {
         //使用无参的Date的方法创建Date对象
 //        Date date = new Date();

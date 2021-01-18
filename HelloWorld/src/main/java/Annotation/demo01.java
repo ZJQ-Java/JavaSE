@@ -21,5 +21,5 @@ public class demo01 {
 @interface annotationTest {
     String name() default "";
 
-    int age()  ;
+    int age();
 }

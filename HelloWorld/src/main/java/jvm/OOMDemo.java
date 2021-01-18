@@ -46,14 +46,14 @@ public class OOMDemo {
         stackLength();
     }
 
-    public static void test03(){
+    public static void test03() {
         while (true) {
 
         }
     }
 
-    public static void stackLeakByThread(){
-        while(true){
+    public static void stackLeakByThread() {
+        while (true) {
             new Thread(OOMDemo::test03).start();
         }
     }

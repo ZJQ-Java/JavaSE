@@ -20,8 +20,8 @@ public class ThreadState {
         System.out.println(t.getState()); //runable
 
 
-        Thread.State state1 = t.getState() ;
-        while (state1!= Thread.State.TERMINATED) {
+        Thread.State state1 = t.getState();
+        while (state1 != Thread.State.TERMINATED) {
             Thread.sleep(1000);
             System.out.println(t.getState());
             state1 = t.getState();

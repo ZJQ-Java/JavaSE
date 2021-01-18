@@ -43,10 +43,10 @@ public class DelayQueueDemo implements Delayed {
         return Long.compare(this.time, msg.time);
     }
 
-    public DelayQueueDemo(int id, String body,long delayTime) {
+    public DelayQueueDemo(int id, String body, long delayTime) {
         this.id = id;
         this.body = body;
-        this.time = TimeUnit.NANOSECONDS.convert(delayTime,TimeUnit.MILLISECONDS) + System.nanoTime();
+        this.time = TimeUnit.NANOSECONDS.convert(delayTime, TimeUnit.MILLISECONDS) + System.nanoTime();
     }
 }
 

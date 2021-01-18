@@ -9,7 +9,7 @@ public class HttpDemo {
     public static void main(String[] args) {
         try {
             ServerSocket socket = new ServerSocket(8080);
-            for(;;){
+            for (; ; ) {
                 Socket accept = socket.accept();
                 Thread t = new Thread(new MySocketHandler(accept));
                 t.start();
@@ -19,16 +19,19 @@ public class HttpDemo {
             e.printStackTrace();
         }
     }
-    public static class MySocketHandler extends Thread{
+
+    public static class MySocketHandler extends Thread {
         private Socket socket;
-        public MySocketHandler(Socket socket){
+
+        public MySocketHandler(Socket socket) {
             this.socket = socket;
         }
+
         @Override
         public void run() {
             super.run();
             try {
-                myHandler(socket.getInputStream(),socket.getOutputStream());
+                myHandler(socket.getInputStream(), socket.getOutputStream());
             } catch (IOException e) {
                 try {
                     socket.close();
@@ -40,7 +43,7 @@ public class HttpDemo {
         }
     }
 
-    public static void  myHandler(InputStream input, OutputStream output) throws IOException {
+    public static void myHandler(InputStream input, OutputStream output) throws IOException {
         System.out.println("Process new http request...");
         BufferedReader reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8));
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(output, StandardCharsets.UTF_8));
@@ -50,7 +53,7 @@ public class HttpDemo {
         if (first.startsWith("GET / HTTP/1.")) {
             requestOk = true;
         }
-        for (;;) {
+        for (; ; ) {
             String header = reader.readLine();
             if (header.isEmpty()) { // 读取到空行时, HTTP Header读取完毕
                 break;

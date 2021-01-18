@@ -5,13 +5,13 @@ import java.util.concurrent.*;
 /**
  * Date:     2019/3/4 17:14
  */
-public class CallableDemo extends Thread{
+public class CallableDemo extends Thread {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         //创建线程
         ExecutorService executorService = Executors.newCachedThreadPool();
         //创建对象
-        Race tortoise = new Race(1000,"tortoise");
-        Race rabbit = new Race(500,"rabbit");
+        Race tortoise = new Race(1000, "tortoise");
+        Race rabbit = new Race(500, "rabbit");
         //提交
         Future<Integer> result = executorService.submit(tortoise);
         Future<Integer> result1 = executorService.submit(rabbit);
@@ -21,17 +21,18 @@ public class CallableDemo extends Thread{
         //获取值
         int num = result.get();
         int num1 = result1.get();
-        System.out.println("乌龟跑了多少步"+num);
-        System.out.println("兔子跑了多少步"+num1);
+        System.out.println("乌龟跑了多少步" + num);
+        System.out.println("兔子跑了多少步" + num1);
         //停止服务
         executorService.shutdown();
     }
 
 
 }
+
 class Race implements Callable<Integer> {
-    private long time;
-    private String name;
+    private long    time;
+    private String  name;
     private boolean flag = true;
     private Integer step = 0;
 
@@ -74,7 +75,7 @@ class Race implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        while(flag){
+        while (flag) {
             Thread.sleep(time);
             step++;
         }

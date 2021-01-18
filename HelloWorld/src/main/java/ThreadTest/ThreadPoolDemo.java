@@ -1,7 +1,5 @@
 package ThreadTest;
 
-import org.apache.poi.ss.formula.functions.T;
-
 import java.util.concurrent.*;
 
 public class ThreadPoolDemo {
@@ -57,11 +55,12 @@ public class ThreadPoolDemo {
             System.out.println("runnable end  i=" + i);
         }
     }
-    public   static class MyCallable<T> implements Callable<T>{
+
+    public static class MyCallable<T> implements Callable<T> {
 
         @Override
         public T call() throws Exception {
-            return (T)"abc";
+            return (T) "abc";
         }
     }
 }

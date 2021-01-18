@@ -7,11 +7,11 @@ import java.util.concurrent.FutureTask;
 public class FutureTaskDemo implements Callable<Integer> {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         FutureTaskDemo f = new FutureTaskDemo();
-        FutureTask task = new FutureTask(f );
-        new Thread(task,"A").start();
-        new Thread(task,"B").start(); //有缓存
+        FutureTask task = new FutureTask(f);
+        new Thread(task, "A").start();
+        new Thread(task, "B").start(); //有缓存
 
-        Integer o = (Integer)task.get();
+        Integer o = (Integer) task.get();
         System.out.println(o);
     }
 

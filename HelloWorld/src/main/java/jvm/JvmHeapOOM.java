@@ -1,7 +1,5 @@
 package jvm;
 
-import org.apache.poi.ss.formula.functions.T;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +22,7 @@ public class JvmHeapOOM {
         }).start();
 
         // 线程二
-         new Thread(() -> {
+        new Thread(() -> {
             try {
                 Thread.sleep(6000);
             } catch (InterruptedException e) {
@@ -35,7 +33,7 @@ public class JvmHeapOOM {
                 System.out.println(new Date().toString() + Thread.currentThread() + "==");
                 System.out.println(list.size());
                 try {
-                    byte[] bytes = new byte[1024*1024 /2];
+                    byte[] bytes = new byte[1024 * 1024 / 2];
                     list.add(bytes);
                     Thread.sleep(1000);
                 } catch (Exception e) {

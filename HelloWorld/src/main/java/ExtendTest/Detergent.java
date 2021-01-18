@@ -7,8 +7,12 @@ public class Detergent extends Cleanser {
         append(" ExtendTest.Detergent.scrub()");
         super.scrub(); // Call base-class version
     }
+
     // Add methods to the interface:
-    public void foam() { append(" foam()"); }
+    public void foam() {
+        append(" foam()");
+    }
+
     // Test the new class:
     public static void main(String[] args) {
         Detergent x = new Detergent();

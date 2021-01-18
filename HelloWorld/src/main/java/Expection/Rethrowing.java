@@ -36,11 +36,11 @@ public class Rethrowing {
             System.out.println("main: printStackTrace()");
             e.printStackTrace(System.out);
         }*/
-       int i=1;
+        int i = 1;
         try {
             h();
         } catch (Exception e) {
-            if(i == 1){
+            if (i == 1) {
                 System.out.println("11111");
                 return;
             }

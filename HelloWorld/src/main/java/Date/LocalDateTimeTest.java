@@ -59,7 +59,7 @@ public class LocalDateTimeTest {
         System.out.println("nextMonthLastDay :" + nextMonthLastDay);
         // 本月第1个周一:
         LocalDate firstWeekday = LocalDate.now().with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY));
-        System.out.println("firstWeekday:" +firstWeekday );
+        System.out.println("firstWeekday:" + firstWeekday);
         // 本月最后一个nextMonthFirstDay.getDayOfWeek()的日期
         LocalDate with = LocalDate.now().with(TemporalAdjusters.lastInMonth(firstDay.getDayOfWeek()));
         System.out.println(with);

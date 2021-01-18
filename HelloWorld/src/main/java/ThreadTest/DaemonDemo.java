@@ -1,8 +1,5 @@
 package ThreadTest;
 
-import java.lang.reflect.ParameterizedType;
-import java.util.Queue;
-
 public class DaemonDemo {
     public static void main(String[] args) {
         Thread thread = new Thread(() -> {

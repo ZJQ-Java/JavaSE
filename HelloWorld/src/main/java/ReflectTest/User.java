@@ -1,9 +1,5 @@
 package ReflectTest;
 
-import java.time.DayOfWeek;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-
 /**
  * Author:   zhangjinqiu03
  * Date:     2019/1/10 15:01
@@ -100,9 +96,11 @@ public class User {
     }
 
 }
-class init{
-    public init(){
+
+class init {
+    public init() {
         System.out.println("---------------init------------------");
     }
+
     public static int im = 1;
 }

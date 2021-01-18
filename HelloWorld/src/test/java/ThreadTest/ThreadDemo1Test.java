@@ -2,11 +2,9 @@ package ThreadTest;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class ThreadDemo1Test {
     @Test
-    public void myThreadTest(){
+    public void myThreadTest() {
         //方式二
         System.out.println("--------myThreadTest begin--------");
         Thread t = new ThreadDemo1.MyThread();
@@ -15,7 +13,7 @@ public class ThreadDemo1Test {
     }
 
     @Test
-    public void myRunnableTest(){
+    public void myRunnableTest() {
         //方式三
         System.out.println("--------myRunnableTest begin--------");
         Thread t = new Thread(new ThreadDemo1.MyRunnable());
