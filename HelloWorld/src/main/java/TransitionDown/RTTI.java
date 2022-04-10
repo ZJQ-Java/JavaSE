@@ -4,27 +4,35 @@ class Useful {
     public void f() {
         System.out.println("base:f()");
     }
+
     public void g() {
         System.out.println("base:g()");
 
     }
 }
+
 //向下转型
 class MoreUseful extends Useful {
     @Override
     public void f() {
         System.out.println("MoreUseful:f()");
     }
+
     @Override
     public void g() {
         System.out.println("MoreUseful:g()");
 
     }
+
     public void u() {
         System.out.println("MoreUseful:u()");
     }
-    public void v() {}
-    public void w() {}
+
+    public void v() {
+    }
+
+    public void w() {
+    }
 }
 
 public class RTTI {

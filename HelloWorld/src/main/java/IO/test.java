@@ -31,7 +31,7 @@ public class test {
 */
         FileInputStream fileInputStream = new FileInputStream("C:\\Users\\zhangjinqiu03\\Desktop\\新建文本文档.txt");
         int n;
-        byte[] bytes  = new byte[32];
+        byte[] bytes = new byte[32];
         StringBuffer buffer = new StringBuffer();
         while ((n = fileInputStream.read(bytes)) != -1) {
             buffer.append((char) n);

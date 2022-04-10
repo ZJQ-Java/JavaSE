@@ -22,7 +22,8 @@ public class CounterDemo {
         }
         return result;
     }
-    public synchronized int del(int i){
+
+    public synchronized int del(int i) {
         return --i;
     }
 }

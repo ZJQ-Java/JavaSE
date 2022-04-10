@@ -4,7 +4,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveTask;
-import java.util.stream.LongStream;
 
 public class ForkJoinDemo extends RecursiveTask<Long> {
     long start;
@@ -41,6 +40,7 @@ public class ForkJoinDemo extends RecursiveTask<Long> {
 
         return result;
     }
+
     public static Long test() throws ExecutionException, InterruptedException {
         ForkJoinPool forkJoinPool = new ForkJoinPool();
         ForkJoinTask<Long> forkJoinTask = new ForkJoinDemo(0L, 100_000_0000);
@@ -76,7 +76,7 @@ public class ForkJoinDemo extends RecursiveTask<Long> {
         startTime = System.currentTimeMillis();
         sum = ForkJoinDemo.test();
         endTime = System.currentTimeMillis();
-        System.out.println(endTime - startTime +"  sum=" + sum);
+        System.out.println(endTime - startTime + "  sum=" + sum);
         /*User u1 = new User(1, 21, "a");
         User u2 = new User(2, 22, "b");
         User u3 = new User(3, 23, "c");

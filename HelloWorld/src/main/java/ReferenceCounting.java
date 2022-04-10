@@ -1,9 +1,9 @@
 // polymorphism/ReferenceCounting.java
 // Cleaning up shared member objects
 class Shared {
-    private int refcount = 0;
-    private static long counter = 0;
-    private final long id = counter++;
+    private        int  refcount = 0;
+    private static long counter  = 0;
+    private final  long id       = counter++;
 
     Shared() {
         System.out.println("Creating " + this);
@@ -26,9 +26,9 @@ class Shared {
 }
 
 class Composing {
-    private Shared shared;
-    private static long counter = 0;
-    private final long id = counter++;
+    private        Shared shared;
+    private static long   counter = 0;
+    private final  long   id      = counter++;
 
     Composing(Shared shared) {
         System.out.println("Creating " + this);
@@ -57,7 +57,7 @@ public class ReferenceCounting {
                 new Composing(shared),
                 new Composing(shared),
         };
-        for (Composing c: composing) {
+        for (Composing c : composing) {
             c.dispose();
         }
     }

@@ -2,9 +2,8 @@ package IO;
 
 import Expection.MyException;
 
-import java.io.*;
 import java.io.InputStream;
-import java.rmi.server.ExportException;
+import java.io.*;
 
 /**
  * Author:   zhangjinqiu03
@@ -16,43 +15,43 @@ public class BufferInputStreamTest {
         java.io.InputStream inputStream = new BufferedInputStream(new FileInputStream(srcPath));
         byte[] bytes = new byte[1024];
         int len;
-        while((len = inputStream.read(bytes)) != -1){
-            String str = new String(bytes,0,len);
+        while ((len = inputStream.read(bytes)) != -1) {
+            String str = new String(bytes, 0, len);
             System.out.println(str);
         }
         throw new MyException("sdasdas");
-      //  throw new MyException("小拳拳");
-     //   inputStream.close();
+        //  throw new MyException("小拳拳");
+        //   inputStream.close();
     }
-    public static void method1(String srcPath){
+
+    public static void method1(String srcPath) {
         InputStream inputStream = null;
         try {
             inputStream = new BufferedInputStream(new FileInputStream(srcPath));
             byte[] bytes = new byte[1024];
             int len;
-            while((len = inputStream.read()) != -1){
-                String str = new String(bytes,0,len);
+            while ((len = inputStream.read()) != -1) {
+                String str = new String(bytes, 0, len);
                 System.out.println(str);
 
             }
-         //   return "success";
-        } catch (FileNotFoundException e){
+            //   return "success";
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
 //            System.out.println("FileNotFoundException");
 //            System.out.println("getMessage:"+e.getMessage());
 //            System.out.println("toString ： " +e.toString());
 //            return "result:FileNotFoundException";
-        }
-          catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-              System.out.println("IOException");
+            System.out.println("IOException");
             //  return "result: IOException";
 
-          } finally{
+        } finally {
             try {
                 System.out.println("finally");
-                if(inputStream!=null)
-                inputStream.close();
+                if (inputStream != null)
+                    inputStream.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -65,7 +64,7 @@ public class BufferInputStreamTest {
             method("D:/fileT/serialize.txt");
         } catch (IOException e) {
             e.printStackTrace();
-           // System.out.println(e.getMessage());
+            // System.out.println(e.getMessage());
         } catch (MyException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {

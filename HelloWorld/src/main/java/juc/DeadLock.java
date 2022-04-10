@@ -1,4 +1,4 @@
-package ThreadTest;
+package juc;
 
 public class DeadLock {
 

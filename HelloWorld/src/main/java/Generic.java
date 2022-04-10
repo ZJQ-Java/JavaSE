@@ -15,9 +15,11 @@ public class Generic<T> {
     public Generic(T key) {
         this.key = key;
     }
-    public static  void showKeyValue1(Generic<?> obj){
-        System.out.println(("泛型测试"+"key value is " + obj.getKey()));
+
+    public static void showKeyValue1(Generic<?> obj) {
+        System.out.println(("泛型测试" + "key value is " + obj.getKey()));
     }
+
     public static void main(String[] args) {
         Generic<Integer> generic = new Generic<Integer>(123);
         Generic<Number> generic1 = new Generic<Number>(123);

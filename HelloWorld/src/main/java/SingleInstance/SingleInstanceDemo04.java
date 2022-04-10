@@ -1,7 +1,7 @@
 package SingleInstance;
 
 public class SingleInstanceDemo04 {
-    //懒汉 非线程安全
+    //e汉 非线程安全
     private static SingleInstanceDemo04 instance = new SingleInstanceDemo04();
 
     private SingleInstanceDemo04() {

@@ -1,8 +1,9 @@
 import ReflectTest.User;
-import com.alibaba.fastjson.JSONObject;
 
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Test111 {
     private static int                        age;
@@ -83,7 +84,7 @@ public class Test111 {
 //        }else{
 //            System.out.println(0b11111);
 //        }
-        List<User> users = Arrays.asList(new User(1,1,"z"),new User(2,2,"g"));
+        List<User> users = Arrays.asList(new User(1, 1, "z"), new User(2, 2, "g"));
         System.out.println(users);
         for (User user : users) {
             user.setAge(1);

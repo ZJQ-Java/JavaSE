@@ -1,9 +1,6 @@
 package Test;
 
 
-import java.io.IOException;
-import java.io.InputStream;
-
 public class NewHello {
     int i;
 
@@ -14,12 +11,13 @@ public class NewHello {
     public NewHello() {
     }
 
-    static public int testNullAble(int i, boolean flag){
-        if(flag){
+    static public int testNullAble(int i, boolean flag) {
+        if (flag) {
             return i;
         }
         return 0;
     }
+
     public static void main(String[] args) {
 //        NewHello.testNullAble(2,);
         NewHello newHello = new NewHello(2);
@@ -37,9 +35,9 @@ public class NewHello {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
-        String s1=newHello.getClass().getResource("").getPath();
-        String s2=newHello.getClass().getResource("/").getPath();
-        String s3=newHello.getClass().getResource("/11.properties").getPath();
+        String s1 = newHello.getClass().getResource("").getPath();
+        String s2 = newHello.getClass().getResource("/").getPath();
+        String s3 = newHello.getClass().getResource("/11.properties").getPath();
         System.out.println(s1);
         System.out.println(s2);
         System.out.println(s3);

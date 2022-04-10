@@ -41,10 +41,10 @@ public class Strategize {
                     }
                 },
                 msg -> {
-                   return  msg.substring(0, 5); // [3]
+                    return msg.substring(0, 5); // [3]
                 },
                 msg -> msg.substring(0, 5), // [3]
-                test->test.trim(),
+                test -> test.trim(),
                 Unrelated::twice // [4]
         };
         Strategize s = new Strategize("Hello there");

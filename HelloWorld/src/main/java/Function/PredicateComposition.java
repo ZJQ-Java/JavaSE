@@ -55,8 +55,5 @@ public class PredicateComposition {
         System.out.println("初始化容量为10000000，耗时 ： " + (s4 - s3));*/
 
 
-
-
-
     }
 }

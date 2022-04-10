@@ -1,12 +1,15 @@
 package juc;
 
-import java.util.concurrent.*;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class BlockQueueDemo {
-    public static ReentrantLock lock = new ReentrantLock();
-    static Condition condition = BlockQueueDemo.lock.newCondition();
+    public static ReentrantLock lock      = new ReentrantLock();
+    static        Condition     condition = BlockQueueDemo.lock.newCondition();
 
     public static void main(String[] args) throws InterruptedException {
         /*ArrayBlockingQueue bqueue = new ArrayBlockingQueue(1);
@@ -81,7 +84,7 @@ public class BlockQueueDemo {
         System.out.println(blockingQueue.offer("a"));
         System.out.println(blockingQueue.offer("b"));
         System.out.println(blockingQueue.offer("c"));
-         System.out.println(blockingQueue.offer("d")); // false 不抛出异常！
+        System.out.println(blockingQueue.offer("d")); // false 不抛出异常！
         System.out.println("============================");
         System.out.println(blockingQueue.poll());
         System.out.println(blockingQueue.poll());
@@ -122,10 +125,10 @@ public class BlockQueueDemo {
         blockingQueue.offer("a");
         blockingQueue.offer("b");
         blockingQueue.offer("c");
-        new Thread(()->{
+        new Thread(() -> {
             System.out.println(blockingQueue.poll());
         }).start();
-         blockingQueue.offer("d",2,TimeUnit.SECONDS); // 等待超过2秒就退出
+        blockingQueue.offer("d", 2, TimeUnit.SECONDS); // 等待超过2秒就退出
         System.out.println("===============");
         System.out.println(blockingQueue.poll());
         System.out.println(blockingQueue.poll());

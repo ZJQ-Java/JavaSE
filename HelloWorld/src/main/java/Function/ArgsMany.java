@@ -23,6 +23,6 @@ public class ArgsMany {
         list.add(2);
         list.add(3);
         list.add(4);
-        System.out.println(list.stream().noneMatch(o->o.equals(5)));
+        System.out.println(list.stream().noneMatch(o -> o.equals(5)));
     }
 }

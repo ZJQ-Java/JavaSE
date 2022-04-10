@@ -23,20 +23,20 @@ class Bank extends Thread {
     @Override
     public void run() {
 
-       synchronized(account){
-           if (account.getMoney() - nowMoney < 0) {
-               System.out.println(this.getName() + " 余额不足...");
-               return;
-           }
-           try {
-               Thread.sleep(1000);
-           } catch (InterruptedException e) {
-               e.printStackTrace();
-           }
-           account.setMoney(account.getMoney() - nowMoney);
-           System.out.println("账户中钱：" + account.getMoney());
-           System.out.println(this.getName() + " 手中钱" + nowMoney);
-       }
+        synchronized (account) {
+            if (account.getMoney() - nowMoney < 0) {
+                System.out.println(this.getName() + " 余额不足...");
+                return;
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            account.setMoney(account.getMoney() - nowMoney);
+            System.out.println("账户中钱：" + account.getMoney());
+            System.out.println(this.getName() + " 手中钱" + nowMoney);
+        }
     }
 }
 

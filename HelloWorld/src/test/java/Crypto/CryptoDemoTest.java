@@ -22,7 +22,7 @@ import java.util.Base64;
 
 public class CryptoDemoTest {
     @Test
-    public void  urlTest(){
+    public void urlTest() {
         try {
             String encode = URLEncoder.encode("中！", "UTF-8");
             System.out.println(encode);
@@ -34,9 +34,9 @@ public class CryptoDemoTest {
     }
 
     @Test
-    public void base64Test(){
+    public void base64Test() {
         //24位3字节 变 32位4字节 不够自动补0x00（=）
-        byte[] input = new byte[] { (byte) 0xe4, (byte) 0xb8, (byte) 0xad, 0x21 };
+        byte[] input = new byte[]{(byte) 0xe4, (byte) 0xb8, (byte) 0xad, 0x21};
         String b64encoded = Base64.getEncoder().encodeToString(input);
         String b64encoded2 = Base64.getEncoder().withoutPadding().encodeToString(input);
         System.out.println(b64encoded);
@@ -46,20 +46,20 @@ public class CryptoDemoTest {
     }
 
     @Test
-    public void MD5Test(){
+    public void MD5Test() {
         //
         try {
             MessageDigest md5Digest = MessageDigest.getInstance("MD5");
             md5Digest.update("Hello World".getBytes(StandardCharsets.UTF_8));
             byte[] digest = md5Digest.digest();
-            System.out.println(new BigInteger(1,digest).toString(16));
+            System.out.println(new BigInteger(1, digest).toString(16));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void hmacMd5Test(){
+    public void hmacMd5Test() {
         try {
             //encode
             KeyGenerator hmacMD5 = KeyGenerator.getInstance("HmacMD5");
@@ -70,7 +70,7 @@ public class CryptoDemoTest {
             mac.init(secretKey);
             mac.update("Hello World".getBytes(StandardCharsets.UTF_8));
             byte[] bytes = mac.doFinal();
-            System.out.println(new BigInteger(1,bytes).toString(16));
+            System.out.println(new BigInteger(1, bytes).toString(16));
 
             //decode
             /*SecretKey decodeSecret = new SecretKeySpec(encodedByte,"HmacMD5");
@@ -91,8 +91,9 @@ public class CryptoDemoTest {
         byte[] bytes = "hello World".getBytes();
         byte[] encrypt = encrypt(key, bytes);
         System.out.println(Base64.getEncoder().encodeToString(encrypt));
-        System.out.println(new String(decrypt(key,encrypt)));
+        System.out.println(new String(decrypt(key, encrypt)));
     }
+
     // 加密:
     private static byte[] encrypt(byte[] key, byte[] input) throws GeneralSecurityException {
         Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");

@@ -17,19 +17,20 @@ public class FinalData {
     public FinalData(String id) {
         this.id = id;
     }
+
     // Can be compile-time constants:
-    private final int valueOne = 9;
-    private static final int VALUE_TWO = 99;
+    private final        int   valueOne    = 9;
+    private static final int   VALUE_TWO   = 99;
     // Typical public constant:
-    public static final int VALUE_THREE = 39;
+    public static final  int   VALUE_THREE = 39;
     // Cannot be compile-time constants:
-    private final int i4 = rand.nextInt(20);
-    static final int INT_5 = rand.nextInt(20);
-    private Value v1 = new Value(11);
-    private final Value v2 = new Value(22);
-    private static final Value VAL_3 = new Value(33);
+    private final        int   i4          = rand.nextInt(20);
+    static final         int   INT_5       = rand.nextInt(20);
+    private              Value v1          = new Value(11);
+    private final        Value v2          = new Value(22);
+    private static final Value VAL_3       = new Value(33);
     // Arrays:
-    private final int[] a = {1, 2, 3, 4, 5, 6};
+    private final        int[] a           = {1, 2, 3, 4, 5, 6};
 
     @Override
     public String toString() {

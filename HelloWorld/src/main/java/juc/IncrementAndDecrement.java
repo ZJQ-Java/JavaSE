@@ -3,7 +3,7 @@ package juc;
 public class IncrementAndDecrement {
     public static void main(String[] args) {
         Data data = new Data();
-        new Thread(()->{
+        new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 try {
                     data.increment();
@@ -11,8 +11,8 @@ public class IncrementAndDecrement {
                     e.printStackTrace();
                 }
             }
-        },"A").start();
-        new Thread(()->{
+        }, "A").start();
+        new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 try {
                     data.decrement();
@@ -20,8 +20,8 @@ public class IncrementAndDecrement {
                     e.printStackTrace();
                 }
             }
-        },"B").start();
-        new Thread(()->{
+        }, "B").start();
+        new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 try {
                     data.increment();
@@ -29,9 +29,9 @@ public class IncrementAndDecrement {
                     e.printStackTrace();
                 }
             }
-        },"C").start();
+        }, "C").start();
 
-        new Thread(()->{
+        new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 try {
                     data.decrement();
@@ -39,7 +39,7 @@ public class IncrementAndDecrement {
                     e.printStackTrace();
                 }
             }
-        },"D").start();
+        }, "D").start();
     }
 
 

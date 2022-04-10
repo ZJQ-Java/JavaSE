@@ -1,6 +1,6 @@
 package Test;
 
-public class ManPeople extends People{
+public class ManPeople extends People {
     private String muscle;
 
     public ManPeople() {

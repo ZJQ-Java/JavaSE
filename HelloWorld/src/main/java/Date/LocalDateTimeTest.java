@@ -1,11 +1,22 @@
 package Date;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
 public class LocalDateTimeTest {
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+    public static LocalDate yyyyMMddToLocalTime(int date) {
+        return LocalDate.parse(date + "", DATE_FORMATTER);
+    }
+
     public static void main(String[] args) {
         /*LocalDateTime localDateTime = LocalDateTime.now();
         LocalDate localDate = localDateTime.toLocalDate();
@@ -31,26 +42,30 @@ public class LocalDateTimeTest {
         System.out.println(localDateTime2.withMinute(16));*/
 
         //with
-        /*System.out.println("==================with=================");
+        System.out.println("==================with=================");
         // 本月第一天0:00时刻:
         LocalDateTime firstDay = LocalDate.now().withDayOfMonth(1).atStartOfDay();
-        System.out.println(firstDay);
+        System.out.println("firstDay:" + firstDay);
 
         // 本月最后1天:
         LocalDate lastDay = LocalDate.now().with(TemporalAdjusters.lastDayOfMonth());
 
-        System.out.println(lastDay);
+        System.out.println("lastDay:" + lastDay);
         // 下月第1天:
         LocalDate nextMonthFirstDay = LocalDate.now().with(TemporalAdjusters.firstDayOfNextMonth());
-        System.out.println(nextMonthFirstDay);
+        System.out.println("nextMonthFirstDay:" + nextMonthFirstDay);
 
+        LocalDate nextMonthLastDay = nextMonthFirstDay.with(TemporalAdjusters.lastDayOfMonth());
+        System.out.println("nextMonthLastDay :" + nextMonthLastDay);
         // 本月第1个周一:
         LocalDate firstWeekday = LocalDate.now().with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY));
-        System.out.println(firstWeekday);
+        System.out.println("firstWeekday:" + firstWeekday);
         // 本月最后一个nextMonthFirstDay.getDayOfWeek()的日期
         LocalDate with = LocalDate.now().with(TemporalAdjusters.lastInMonth(firstDay.getDayOfWeek()));
-        System.out.println(with);*/
+        System.out.println(with);
 
+        LocalDate localDate = yyyyMMddToLocalTime(20201230);
+        System.out.println(localDate);
         //isBefore isAfter
         /*boolean isAfter = LocalDateTime.now().isAfter(LocalDateTime.of(2020, 8, 19, 20, 19, 20));
         boolean isBefore = LocalDateTime.now().isBefore(LocalDateTime.of(2020, 8, 19, 20, 19, 20));

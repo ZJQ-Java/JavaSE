@@ -1,7 +1,6 @@
 package SingleInstance;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 
 public class SingleInstanceDemo03 {
     //懒汉  线程安全 使用volatile 禁止指令重排

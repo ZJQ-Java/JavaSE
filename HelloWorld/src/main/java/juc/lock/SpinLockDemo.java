@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 public class SpinLockDemo {
     public static void main(String[] args) throws InterruptedException {
         SpinLock lock = new SpinLock();
-        new Thread(()-> {
+        new Thread(() -> {
             try {
                 lock.myLock();
             } catch (InterruptedException e) {
@@ -18,9 +18,9 @@ public class SpinLockDemo {
             } finally {
                 lock.myUnLock();
             }
-        },"T1").start();
+        }, "T1").start();
         TimeUnit.SECONDS.sleep(1);
-        new Thread(()-> {
+        new Thread(() -> {
             try {
                 lock.myLock();
             } catch (InterruptedException e) {
@@ -33,6 +33,6 @@ public class SpinLockDemo {
             } finally {
                 lock.myUnLock();
             }
-        },"T2").start();
+        }, "T2").start();
     }
 }

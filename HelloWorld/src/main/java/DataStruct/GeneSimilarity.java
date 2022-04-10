@@ -19,7 +19,7 @@ public class GeneSimilarity {
         }
         while (baseChar == ' ') {
             if (arrStr[index] >= '0' && arrStr[index] <= '9') {
-                count = count * 10 + arrStr[index]-'0';
+                count = count * 10 + arrStr[index] - '0';
             } else {
                 baseChar = arrStr[index];
             }
@@ -72,6 +72,6 @@ public class GeneSimilarity {
     }
 
     public static void main(String[] args) {
-        System.out.println(GeneSimilarity.GeneSimilarity("1A2T","2A1T"));
+        System.out.println(GeneSimilarity.GeneSimilarity("1A2T", "2A1T"));
     }
 }

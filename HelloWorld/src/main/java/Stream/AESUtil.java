@@ -1,11 +1,11 @@
 package Stream;
 
-import javax.crypto.*;
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -23,6 +23,7 @@ public class AESUtil {
         SecretKey secretKey = kgen.generateKey();// 根据用户密码，生成一个密钥
         return new SecretKeySpec(secretKey.getEncoded(), "AES");
     }
+
     private static String registerEncryptAndBase64(String content) {
         try {
             Cipher cipher = Cipher.getInstance(registerAlgorithm);
@@ -50,6 +51,7 @@ public class AESUtil {
         }
         return null;
     }
+
     public static void main(String[] args) throws Exception {
         String content = "1-" + "111-" + System.currentTimeMillis();
         System.out.println("需要加密的内容：" + content);

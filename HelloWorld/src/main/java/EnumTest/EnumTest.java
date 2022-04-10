@@ -19,7 +19,9 @@ public class EnumTest {
         }
         System.out.println("------------------");
         for (TYPE type : TYPE.values()) {
-            System.out.println("type = " + type + "    type.name = " + type.name() + "   typeName = " + type.getTypeName() + "   ordinal = " + type.ordinal());
+            System.out.println(
+                    "type = " + type + "    type.name = " + type.name() + "   typeName = " + type.getTypeName() +
+                            "   ordinal = " + type.ordinal());
         }
     }
 

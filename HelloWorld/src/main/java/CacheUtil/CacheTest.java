@@ -13,7 +13,8 @@ import java.util.concurrent.TimeUnit;
 public class CacheTest {
     private static RemovalListener<Object, Object> removalListener =
             removal -> System.out.println(" [" + removal.getKey() + "]被移除原因是 [" + removal.getCause() + "] ");
-    public static  LoadingCache<Object, Object>    localCache      = CacheBuilder.newBuilder().initialCapacity(2).maximumSize(3)
+    public static  LoadingCache<Object, Object>    localCache      = CacheBuilder.newBuilder().initialCapacity(2)
+            .maximumSize(3)
             .expireAfterAccess(3, TimeUnit.SECONDS)
 //            .expireAfterWrite(3, TimeUnit.SECONDS)
             .removalListener(removalListener)

@@ -9,15 +9,14 @@ import java.io.IOException;
  * Date:     2019/2/19 15:09
  */
 public class WriteFile {
-    public static void main( String[] args )
-    {
-        try{
+    public static void main(String[] args) {
+        try {
             String data = "this is writeFile";
 
-            File file =new File("D:/videos/WriteFile.txt");
+            File file = new File("D:/videos/WriteFile.txt");
 
             //if file doesnt exists, then create it
-            if(!file.exists()){
+            if (!file.exists()) {
                 file.createNewFile();
             }
 
@@ -33,7 +32,7 @@ public class WriteFile {
 
             System.out.println("Done");
 
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

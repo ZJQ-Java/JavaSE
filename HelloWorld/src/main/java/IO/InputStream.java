@@ -7,9 +7,10 @@ import java.util.List;
 /**
  * Date:     2019/3/1 14:44
  */
-class Test<T>{
-    private  T age;
-    Test(T age){
+class Test<T> {
+    private T age;
+
+    Test(T age) {
         this.age = age;
     }
 
@@ -21,7 +22,8 @@ class Test<T>{
         this.age = age;
     }
 }
-class Generic<T>{
+
+class Generic<T> {
     //key这个成员变量的类型为T,T的类型由外部指定
     private T key;
 
@@ -29,7 +31,7 @@ class Generic<T>{
         this.key = key;
     }
 
-    public T getKey(){ //泛型方法getKey的返回值类型为T，T的类型由外部指定
+    public T getKey() { //泛型方法getKey的返回值类型为T，T的类型由外部指定
         return key;
     }
 
@@ -40,6 +42,7 @@ class Generic<T>{
                 '}';
     }
 }
+
 public class InputStream {
     public static void main(String args[]) throws IOException {
         // 使用 System.in 创建 BufferedReader
